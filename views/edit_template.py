@@ -1,5 +1,6 @@
 # views/edit_template.py (com botão de exportação para PDF)
 import flet as ft
+from flet.core.icons import Icons
 from core.database import Database
 from core.template_exporter import export_template_pdf
 
@@ -15,12 +16,12 @@ class EditTemplate(ft.Column):
 
         self.controls.append(ft.Text(f"Editar Template: {transtorno}", size=24, weight=ft.FontWeight.BOLD))
         self.controls.append(self.campos_container)
-        self.controls.append(ft.ElevatedButton("Adicionar Campo", icon=ft.icons.ADD, on_click=self.adicionar_campo))
-        self.controls.append(ft.ElevatedButton("Salvar Template", icon=ft.icons.SAVE, on_click=self.salvar_template))
-        self.controls.append(ft.ElevatedButton("Exportar como TXT", icon=ft.icons.DOWNLOAD, on_click=self.exportar_txt))
-        self.controls.append(ft.ElevatedButton("Exportar como PDF", icon=ft.icons.PICTURE_AS_PDF, on_click=self.exportar_pdf))
-        self.controls.append(ft.ElevatedButton("Duplicar Template", icon=ft.icons.COPY, on_click=self.duplicar_template))
-        self.controls.append(ft.ElevatedButton("Voltar", icon=ft.icons.ARROW_BACK, on_click=self.voltar))
+        self.controls.append(ft.ElevatedButton("Adicionar Campo", icon=Icons.ADD, on_click=self.adicionar_campo))
+        self.controls.append(ft.ElevatedButton("Salvar Template", icon=Icons.SAVE, on_click=self.salvar_template))
+        self.controls.append(ft.ElevatedButton("Exportar como TXT", icon=Icons.DOWNLOAD, on_click=self.exportar_txt))
+        self.controls.append(ft.ElevatedButton("Exportar como PDF", icon=Icons.PICTURE_AS_PDF, on_click=self.exportar_pdf))
+        self.controls.append(ft.ElevatedButton("Duplicar Template", icon=Icons.COPY, on_click=self.duplicar_template))
+        self.controls.append(ft.ElevatedButton("Voltar", icon=Icons.ARROW_BACK, on_click=self.voltar))
 
         self.load_template()
         self.page.on_keyboard_event = self.handle_keyboard
@@ -54,7 +55,7 @@ class EditTemplate(ft.Column):
             campo_rotulo,
             campo_variavel,
             campo_linhas,
-            ft.IconButton(icon=ft.icons.DELETE, tooltip="Remover", on_click=lambda _: self.remover_campo(linha))
+            ft.IconButton(icon=Icons.DELETE, tooltip="Remover", on_click=lambda _: self.remover_campo(linha))
         ], alignment=ft.MainAxisAlignment.START)
 
         self.campos.append((linha, tipo_dropdown, campo_rotulo, campo_variavel, campo_linhas))
