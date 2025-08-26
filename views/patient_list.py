@@ -1,5 +1,6 @@
 # views/patient_list.py (atualizado com sugestão de transtorno ao iniciar nova consulta e integração com templates por transtorno)
 import flet as ft
+from flet.core.icons import Icons
 from core.database import Database
 import threading
 import time
@@ -54,7 +55,7 @@ class PatientList(ft.Column):
                                 style=ft.ButtonStyle(color=ft.colors.BLUE, padding=10)
                             ),
                             ft.IconButton(
-                                icon=ft.icons.NOTE_ADD,
+                                icon=Icons.NOTE_ADD,
                                 tooltip="Nova Consulta",
                                 icon_color=ft.colors.GREEN,
                                 on_click=lambda e, nome=nome: self.nova_consulta(nome)

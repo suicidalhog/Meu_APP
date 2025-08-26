@@ -36,6 +36,19 @@ class Database:
         self.cursor.execute("INSERT INTO consultas (nome, data, anotacoes) VALUES (?, ?, ?)", (nome, data, anotacoes))
         self.conn.commit()
 
+    def buscar_pacientes(self, termo):
+        """Busca pacientes pelo nome utilizando correspondência parcial.
+
+        Retorna uma lista de dicionários com a chave ``nome``. O uso de
+        ``SELECT DISTINCT`` evita que o mesmo paciente apareça múltiplas vezes
+        caso já exista mais de um registro na tabela ``pacientes``.
+        """
+        like = f"%{termo}%"
+        self.cursor.execute(
+            "SELECT DISTINCT nome FROM pacientes WHERE nome LIKE ?", (like,)
+        )
+        return [{"nome": row[0]} for row in self.cursor.fetchall()]
+
     def buscar_historico(self, nome):
         self.cursor.execute("SELECT data, anotacoes FROM consultas WHERE nome = ? ORDER BY id DESC", (nome,))
         return self.cursor.fetchall()

@@ -1,5 +1,6 @@
 # views/patient_history.py
 import flet as ft
+from flet.core.icons import Icons
 from core.database import Database
 from core.pdf_exporter import export_patient_consultas_pdf
 
@@ -15,11 +16,15 @@ class PatientHistory(ft.Column):
         self.resultado = ft.Column(spacing=10)
         self.controls.append(self.resultado)
 
-        self.exportar_btn = ft.ElevatedButton("Exportar Histórico em PDF", icon=ft.icons.PICTURE_AS_PDF, on_click=self.exportar_pdf)
+        self.exportar_btn = ft.ElevatedButton(
+            "Exportar Histórico em PDF",
+            icon=Icons.PICTURE_AS_PDF,
+            on_click=self.exportar_pdf,
+        )
         self.controls.append(self.exportar_btn)
 
         self.pdf_path = ft.TextField(label="Arquivo PDF gerado", visible=False, read_only=True)
-        self.copy_btn = ft.IconButton(icon=ft.icons.CONTENT_COPY, visible=False, on_click=self.copiar)
+        self.copy_btn = ft.IconButton(icon=Icons.CONTENT_COPY, visible=False, on_click=self.copiar)
         self.controls.append(ft.Row([self.pdf_path, self.copy_btn]))
 
         self.page.on_keyboard_event = self.handle_keyboard

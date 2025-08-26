@@ -1,5 +1,6 @@
 # views/template_list.py
 import flet as ft
+from flet.core.icons import Icons
 from core.database import Database
 from views.edit_template import EditTemplate
 from core.template_exporter import export_template_pdf
@@ -15,7 +16,7 @@ class TemplateList(ft.Column):
         self.template_container = ft.Column()
         self.controls.append(self.template_container)
 
-        self.controls.append(ft.ElevatedButton("Criar Novo Template", icon=ft.icons.ADD, on_click=self.novo_template))
+        self.controls.append(ft.ElevatedButton("Criar Novo Template", icon=Icons.ADD, on_click=self.novo_template))
 
         self.page.on_keyboard_event = self.handle_keyboard
 
@@ -36,8 +37,8 @@ class TemplateList(ft.Column):
                 self.template_container.controls.append(
                     ft.Row([
                         ft.Text(nome, size=16, expand=True),
-                        ft.IconButton(icon=ft.icons.EDIT, tooltip="Editar", on_click=lambda e, n=nome: self.editar(n)),
-                        ft.IconButton(icon=ft.icons.PICTURE_AS_PDF, tooltip="Exportar PDF", on_click=lambda e, n=nome: self.exportar(n))
+                        ft.IconButton(icon=Icons.EDIT, tooltip="Editar", on_click=lambda e, n=nome: self.editar(n)),
+                        ft.IconButton(icon=Icons.PICTURE_AS_PDF, tooltip="Exportar PDF", on_click=lambda e, n=nome: self.exportar(n))
                     ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN)
                 )
 

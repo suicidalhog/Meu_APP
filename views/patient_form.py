@@ -1,5 +1,6 @@
 # views/patient_form.py (com atalhos de teclado: Ctrl+S, Ctrl+P)
 import flet as ft
+from flet.core.icons import Icons
 from core.database import Database
 from core.pdf_exporter import export_patient_consultas_pdf
 from datetime import datetime
@@ -21,10 +22,21 @@ class PatientForm(ft.Column):
         self.load_template_fields()
 
         self.controls.append(ft.ElevatedButton("Salvar no banco de dados", on_click=self.salvar_consulta))
-        self.controls.append(ft.ElevatedButton("Exportar histórico em PDF", icon=ft.icons.PICTURE_AS_PDF, on_click=self.exportar_pdf))
+        self.controls.append(
+            ft.ElevatedButton(
+                "Exportar histórico em PDF",
+                icon=Icons.PICTURE_AS_PDF,
+                on_click=self.exportar_pdf,
+            )
+        )
 
         self.pdf_path_field = ft.TextField(label="Arquivo PDF gerado", visible=False, read_only=True, value="")
-        self.copy_button = ft.IconButton(icon=ft.icons.CONTENT_COPY, tooltip="Copiar caminho", visible=False, on_click=self.copiar_caminho)
+        self.copy_button = ft.IconButton(
+            icon=Icons.CONTENT_COPY,
+            tooltip="Copiar caminho",
+            visible=False,
+            on_click=self.copiar_caminho,
+        )
         self.controls.append(ft.Row([self.pdf_path_field, self.copy_button]))
 
         self.page.on_keyboard_event = self.handle_keyboard
